@@ -1,15 +1,14 @@
 package com.example.todolist
 
+import TasksItemAdapter
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.todolist.adapters.SanaItemAdapter
-import com.example.todolist.adapters.TasksItemAdapter
 import com.example.todolist.databinding.ActivityMainBinding
+import com.example.todolist.databinding.SanaItemBinding
+
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding:ActivityMainBinding
@@ -51,6 +50,22 @@ class MainActivity : AppCompatActivity() {
         var tasksItemAdapter = TasksItemAdapter(tasksList)
         var myLayoutManager =LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false)
         var tasksLayoutManager =LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)
+
+        sanaItemAdapter.setListener(object : RecyclerListener {
+            override fun onCklickItem(binding1: SanaItemBinding) {
+                binding1.apply {
+                    sanaImage.setImageResource(R.drawable.color_back2)
+                    sanaDay.textSize = 15F
+                    sanaNumber.textSize = 15F
+
+                    cardView.getLayoutParams().height = 100
+                    cardView.getLayoutParams().width = 100
+                }
+
+
+            }
+
+        })
 
         binding.recyclerViewTasks.apply {
             adapter = tasksItemAdapter
